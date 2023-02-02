@@ -1,5 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LoginService} from "./core/services/login.service";
+import {UserService} from "./core/services/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,9 @@ export class AppComponent implements OnDestroy, OnInit{
   title = 'backoffice';
   role: string = "null"
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService,
+              public userService: UserService,
+              private router: Router) {
   }
 
   ngOnDestroy(): void {
@@ -18,15 +22,13 @@ export class AppComponent implements OnDestroy, OnInit{
   }
 
   ngOnInit(): void {
-    this.loginService.getUser().subscribe({
-      next: (data) => {
-        this.role = data?.roles
-      }
-
-    })
   }
 
   logout() {
+    this.userService.user = {email: "", exp: 0, roles: "", storeId: 0}
     this.loginService.logout()
+    this.router.navigate([
+      `home`,
+    ])
   }
 }

@@ -1,1 +1,90 @@
-<p>store-creation works!</p>
+<section *ngIf="hasLoaded && userService.user.roles != '' && !creationSuccess" class="wrapper">
+  Creation of your store:
+  <br>
+  Some extra personalisation await you later on
+  <p>General information</p>
+
+  <label>Email</label>
+  <input type="text" [(ngModel)]="store.email">
+
+  <label>First name</label>
+  <input type="text" [(ngModel)]="store.firstname">
+
+  <label>Last name</label>
+  <input type="text" [(ngModel)]="store.lastname">
+
+  <label>Phone number</label>
+  <input type="text" [(ngModel)]="store.phoneNumber">
+
+  <label>Sector</label>
+  <input type="text" [(ngModel)]="store.sector">
+
+  <label>Siret</label>
+  <input type="text" [(ngModel)]="store.siret">
+
+  <label>Store name</label>
+  <input type="text" [(ngModel)]="store.storeName">
+
+  <p>Address where your customer will pick up their orders</p>
+
+  <label>City</label>
+  <input type="text" [(ngModel)]="address.city">
+
+  <label>Street name</label>
+  <input type="text" [(ngModel)]="address.streetName ">
+
+  <label>Street number</label>
+  <input type="text" [(ngModel)]="address.streetNumber">
+
+  <label>Postal code</label>
+  <input type="text" [(ngModel)]="address.postalCode">
+
+  <label>Complement</label>
+  <input type="text" [(ngModel)]="address.complement">
+
+  <p>Subscription kind</p>
+  <label>Name</label>
+  <input type="text" [(ngModel)]="subscriptionType[subTypeId].name">
+
+  <label>Turnover</label>
+  <input type="text" [(ngModel)]="subscriptionType[subTypeId].turnover">
+
+  <label>Support</label>
+  <input type="text" [(ngModel)]="subscriptionType[subTypeId].support">
+
+  <label>¨Price</label>
+  <input type="text" [(ngModel)]="subscriptionType[subTypeId].price">
+
+  <button (click)="createStore()">Create my store</button>
+
+</section>
+
+<section *ngIf="hasLoaded && userService.user.roles != '' && creationSuccess && !paymentSuccess" class="wrapper">
+  Creation successful. One last step with the billing!
+
+  <label>Card number</label>
+  <input type="text">
+
+  <label>Name on card</label>
+  <input type="text">
+
+  <label>Expiration date</label>
+  <input type="text">
+
+  <label>Security code</label>
+  <input type="text">
+
+  <label>Invoice rate</label>
+  <select [(ngModel)]="invoiceRate">
+    <option value="weekly">weekly</option>
+    <option value="monthly">monthly</option>
+    <option value="yearly" selected>yearly</option>
+  </select>
+
+  <button (click)="startSubscription()">Pay: {{subscriptionType[subTypeId].price}}€/week</button>
+
+</section>
+
+<section *ngIf="hasLoaded && userService.user.roles != '' && creationSuccess && paymentSuccess">
+  <button (click)="goToHisWebsite()">Success! Go to my website right now!</button>
+</section>

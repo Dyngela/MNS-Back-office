@@ -1,18 +1,33 @@
-<section>
-  <p>Welcome to Collect&verything</p>
-  <p>Here you can create your own shop in exchange of a subscription. We have several kind, more and more advantageous for you!</p>
-  <p>Just click on one of them below and there you go</p>
-  <p>You will need to be logged to proceed next steps</p>
-</section>
+<div *ngIf="dataLoaded && !hasSubbed">
+  <section>
+    <p>Welcome to Collect&verything</p>
+    <p>Here you can create your own shop in exchange of a subscription. We have several kind, more and more advantageous for you!</p>
+    <p>Just click on one of them below and there you go</p>
+    <p>You will need to be logged to proceed next steps</p>
+  </section>
 
-<section *ngIf="dataLoaded" class="wrapper">
-  <div class="card" *ngFor="let type of subType" (click)="redirect(type)">
-    Subscription: {{type.name}}
-    <br>
-    Maximum turnover: {{type.turnover}}€
-    <br>
-    Support level: {{type.support}}
-    <br>
-    Price:  {{type.price}}€/week
-  </div>
-</section>
+  <section *ngIf="dataLoaded" class="wrapper">
+    <div class="card" *ngFor="let type of subType" (click)="redirect(type)">
+      Subscription: {{type.name}}
+      <br>
+      Maximum turnover: {{type.turnover}}€
+      <br>
+      Support level: {{type.support}}
+      <br>
+      Price: {{type.price}}€/week
+    </div>
+  </section>
+</div>
+
+<div *ngIf="dataLoaded && hasSubbed">
+  <p>Welcome back to Collect&verything</p>
+  <p>You can manage your store settings from here and see your customers tickets or even make one for us if you are in need</p>
+  <p>Current subscription:</p>
+  <p>Type: {{currentSub.subscriptionType?.name}}</p>
+  <p>price per week: {{currentSub.subscriptionType?.price}}</p>
+  <p>Date of start: {{dateStart}}</p>
+  <p>Next payment: {{dateEnd}}</p>
+  <p>Invoice rate: {{currentSub.paymentType}}</p>
+
+   <button (click)="changeSub()">Change my subscription</button>
+</div>

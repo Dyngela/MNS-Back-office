@@ -5,3 +5,9 @@ export enum Roles {
   WORKER = "WORKER",
   OWNER = "OWNER"
 }
+
+export enum InvoiceRate {
+  weekly= "weekly",
+  monthly = "monthly",
+  yearly = "yearly"
+}

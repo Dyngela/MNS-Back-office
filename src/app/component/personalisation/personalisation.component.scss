@@ -1,0 +1,16 @@
+.card {
+  display: flex;
+  align-content: flex-start;
+  flex-direction: row;
+  border: solid black;
+  margin-bottom: 0.2rem;
+  padding-left: 0.2rem;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: 30rem;
+  margin-left: 30rem;
+}

@@ -6,6 +6,10 @@ import {RegisterComponent} from "./component/register/register.component";
 import {StatsComponent} from "./component/stats/stats.component";
 import {TicketComponent} from "./component/ticket/ticket.component";
 import {StoreCreationComponent} from "./component/store-creation/store-creation.component";
+import {PersonalManagementComponent} from "./component/personal-management/personal-management.component";
+import {PersonalisationComponent} from "./component/personalisation/personalisation.component";
+import {CreateThemeComponent} from "./component/create-theme/create-theme.component";
+import {UpdateSubscriptionComponent} from "./component/update-subscription/update-subscription.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -14,7 +18,11 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'stats', component: StatsComponent },
   { path: 'ticket', component: TicketComponent },
+  { path: 'management', component: PersonalManagementComponent },
+  { path: 'personalisation', component: PersonalisationComponent },
+  { path: 'create-theme', component: CreateThemeComponent },
   { path: 'creation/:id', component: StoreCreationComponent },
+  { path: 'update-subscription', component: UpdateSubscriptionComponent },
 ];
 
 @NgModule({

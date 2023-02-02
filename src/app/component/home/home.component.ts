@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {SubscriptionService} from "../../core/services/subscription.service";
 import {NavigationExtras, Router} from "@angular/router";
 import {state} from "@angular/animations";
+import {InvoiceRate} from "../../core/constant/enums";
+import {UserService} from "../../core/services/user.service";
 
 export interface SubscriptionType {
   subscriptionTypeId: number;
@@ -9,6 +11,16 @@ export interface SubscriptionType {
   turnover: number;
   support: string;
   price: number;
+}
+
+
+export interface Subscription {
+  subscriptionId: number | null
+  storeId: number | null
+  dateStart: Date | null
+  dateEnd: Date | null
+  paymentType: InvoiceRate | null
+  subscriptionType: SubscriptionType | null
 }
 
 @Component({
@@ -20,11 +32,39 @@ export class HomeComponent implements OnInit {
 
   subType: SubscriptionType[] = []
   dataLoaded: boolean = false;
+  hasSubbed: boolean = false;
+  currentSub: Subscription = {
+    dateEnd: null,
+    dateStart: null,
+    paymentType: null,
+    storeId: null,
+    subscriptionId: null,
+    subscriptionType: null
+  }
+  dateStart: string | undefined = ""
+  dateEnd: string | undefined = ""
 
-  constructor(private sub: SubscriptionService, private router: Router) {
+  constructor(private sub: SubscriptionService,
+              private userService: UserService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
+    this.sub.getStoreSubscription(this.userService.user.storeId).subscribe({
+      next: data => {
+        console.log(data)
+        this.currentSub = data
+        this.hasSubbed = true
+
+        this.dateStart = this.currentSub.dateStart as unknown as string
+        this.dateEnd = this.currentSub.dateEnd as unknown as string
+        this.dateStart = this.dateStart.split("T")[0]
+        this.dateEnd = this.dateEnd.split("T")[0]
+      },
+      error: err => {
+        this.hasSubbed = false
+      }
+    })
     this.sub.getSubscriptions().subscribe({
       next: value => {
         this.subType = value
@@ -39,6 +79,12 @@ export class HomeComponent implements OnInit {
   redirect(type: SubscriptionType) {
     this.router.navigate([
       `creation/${type.subscriptionTypeId}`,
-    ]);
+    ])
+  }
+
+  changeSub() {
+    this.router.navigate([
+      `update-subscription`
+    ])
   }
 }

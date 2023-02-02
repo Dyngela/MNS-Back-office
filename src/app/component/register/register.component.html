@@ -30,14 +30,6 @@
     <label for="sector">Sector: </label>
     <input id="sector" type="text" formControlName="sector">
 
-    <label>Subscription type (you can always change it later, while it's not payed it's not active): </label>
-    <select formControlName="subscriptionId">
-      <option value="1" selected>Bronze</option>
-      <option value="2">Silver</option>
-      <option value="3">Gold</option>
-      <option value="4">Premium</option>
-    </select>
-
     <button type="submit" [disabled]="!form.valid">Submit</button>
   </form>
   <div *ngIf="formError" style="color: red" >

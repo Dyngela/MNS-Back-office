@@ -6,6 +6,7 @@ import {environment} from "../constant/constant";
 import {ApiService} from "./api.service";
 import {SubscriptionType} from "../../component/home/home.component";
 import {RegisterBasicUserRequest, RegisterOwnerRequest} from "../../component/register/register.component";
+import {UserService} from "./user.service";
 
 export interface AuthUser {
   storeId: number
@@ -26,7 +27,7 @@ export class LoginService {
 
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
 
-  constructor(private http: HttpClient, private jwt: JwtService, private api: ApiService) {
+  constructor(private http: HttpClient, private jwt: JwtService, private api: ApiService, private userService: UserService) {
     this.isLoggedIn();
   }
 
@@ -66,6 +67,7 @@ export class LoginService {
   createSession(token: string) {
     const authUser: AuthUser | null = this.jwt.saveUser(token);
     if (authUser) {
+      this.userService.updateUserInfo(authUser)
       this.currentUserSubject.next(authUser);
       this.isAuthenticatedSubject.next(true);
     }

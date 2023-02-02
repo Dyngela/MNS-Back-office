@@ -1,0 +1,35 @@
+<section *ngIf="hasLoaded && !hasBeenClicked">
+
+    <div *ngIf="myThemes.length > 0">
+      <div *ngFor="let theme of myThemes; " (click)="themeClicked(theme)" >
+        <span class="card">Buttons color : {{theme.colorButton}} | Background color: {{theme.colorBackground}} | Font: {{theme.font}} | Catch phrase: {{theme.catchPhrase}} | Active theme: {{theme.active}}</span>
+      </div>
+    </div>
+    <div *ngIf="myThemes.length == 0">
+      No themes created just yet.
+      <button (click)="createTheme()">Create one here</button>
+    </div>
+</section>
+
+<section *ngIf="hasLoaded && hasBeenClicked" class="wrapper">
+  <label>Catch phrase:</label>
+  <input type="text" [(ngModel)]="selectedTheme.catchPhrase">
+
+  <label>Background color:</label>
+  <input type="text" [(ngModel)]="selectedTheme.colorBackground">
+
+  <label>Buttons color:</label>
+  <input type="text" [(ngModel)]="selectedTheme.colorButton">
+
+  <label>Font</label>
+  <input type="text" [(ngModel)]="selectedTheme.font">
+
+  <label>Active theme:</label>
+  <mat-slide-toggle [(ngModel)]="selectedTheme.active"></mat-slide-toggle>
+
+
+  <button (click)="updateTheme()">Update my theme</button>
+  <button (click)="cancelUpdate()">Cancel</button>
+  <button (click)="deleteTheme()">Delete this theme</button>
+</section>
+

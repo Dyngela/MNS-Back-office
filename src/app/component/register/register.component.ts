@@ -14,7 +14,6 @@ export interface RegisterOwnerRequest {
   siret : string,
   storeName : string,
   sector : string,
-  subscriptionId : number
 }
 
 export interface RegisterBasicUserRequest {
@@ -44,7 +43,6 @@ export class RegisterComponent {
     password: new FormControl(''),
     confirmation: new FormControl(''),
     phoneNumber: new FormControl(''),
-    subscriptionId: new FormControl(0),
     siret : new FormControl(''),
     storeName : new FormControl(''),
     sector : new FormControl(''),
@@ -69,8 +67,6 @@ export class RegisterComponent {
       sector: this.form.value.sector || '',
       siret: this.form.value.siret || '',
       storeName: this.form.value.storeName || '',
-      subscriptionId: 0
-
     }
     this.loginService.registerOwnerUser(request).subscribe({
       next: (data) => {

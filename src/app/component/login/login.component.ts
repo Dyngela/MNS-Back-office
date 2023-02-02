@@ -25,6 +25,7 @@ export class LoginComponent {
     if (this.form.valid && this.form.value.email != null && this.form.value.password != null) {
       this.loginService.login({email: this.form.value.email, password: this.form.value.password}).subscribe({
         next: (data) => {
+          console.log(data)
           this.router.navigate([
             `home`,
           ]);

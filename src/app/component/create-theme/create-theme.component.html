@@ -1,0 +1,19 @@
+<section class="wrapper">
+  <label>Catch phrase:</label>
+  <input type="text" [(ngModel)]="theme.catchPhrase">
+
+  <label>Background color:</label>
+  <input type="text" [(ngModel)]="theme.colorBackground">
+
+  <label>Buttons color:</label>
+  <input type="text" [(ngModel)]="theme.colorButton">
+
+  <label>Font</label>
+  <input type="text" [(ngModel)]="theme.font">
+
+  <label>Active theme:</label>
+  <mat-slide-toggle [(ngModel)]="theme.active"></mat-slide-toggle>
+
+
+  <button (click)="createTheme()">Create my theme</button>
+</section>

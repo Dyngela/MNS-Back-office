@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ApiService} from "./api.service";
-import {SubscriptionType} from "../../component/home/home.component";
+import {Subscription, SubscriptionType} from "../../component/home/home.component";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -12,5 +12,17 @@ export class SubscriptionService {
 
   getSubscriptions(): Observable<SubscriptionType[]>{
     return this.api.get("api/v1/subscription/subscriptionsType")
+  }
+
+  getStoreSubscription(storeId: number): Observable<Subscription> {
+    return this.api.get(`api/v1/subscription/${storeId}`)
+  }
+
+  create(sub: Subscription): Observable<Subscription> {
+    return this.api.put("api/v1/subscription/save", sub)
+  }
+
+  update(sub: Subscription): Observable<Subscription> {
+    return this.api.post("api/v1/subscription/save", sub)
   }
 }
