@@ -1,1 +1,54 @@
-<p>register works!</p>
+<section *ngIf="!creationSuccessfull">
+  You can here create an account. It will be from this one that you will be able to manage your shop by connecting with it
+  to your freshly created website. You can even create the main details about your store in the mean time.
+
+  <form [formGroup]="form" (ngSubmit)="createAnAccount()" class="wrapper">
+    <label for="first-name">First Name: </label>
+    <input id="first-name" type="text" formControlName="firstName">
+
+    <label for="last-name">Last Name: </label>
+    <input id="last-name" type="text" formControlName="lastName">
+
+    <label for="email">Email: </label>
+    <input id="email" type="email" formControlName="email">
+
+    <label for="password">Password: </label>
+    <input id="password" type="password" formControlName="password">
+
+    <label for="confirm-password">Password: </label>
+    <input id="confirm-password" type="password" formControlName="confirmation">
+
+    <label for="phoneNumber">Phone number: </label>
+    <input id="phoneNumber" type="text" formControlName="phoneNumber">
+
+    <label for="siret">Siret: </label>
+    <input id="siret" type="text" formControlName="siret">
+
+    <label for="storeName">Store name: </label>
+    <input id="storeName" type="text" formControlName="storeName">
+
+    <label for="sector">Sector: </label>
+    <input id="sector" type="text" formControlName="sector">
+
+    <label>Subscription type (you can always change it later, while it's not payed it's not active): </label>
+    <select formControlName="subscriptionId">
+      <option value="1" selected>Bronze</option>
+      <option value="2">Silver</option>
+      <option value="3">Gold</option>
+      <option value="4">Premium</option>
+    </select>
+
+    <button type="submit" [disabled]="!form.valid">Submit</button>
+  </form>
+  <div *ngIf="formError" style="color: red" >
+    Error, you have to have the same password in both field
+  </div>
+</section>
+
+<section *ngIf="creationSuccessfull">
+  Your account have been created successfully, you can now login with your account you just created!
+  You will then be able to process for payment and deep personalisation of your new webstore
+
+  <button routerLink="/login">Login</button>
+
+</section>

@@ -11,6 +11,6 @@ export class SubscriptionService {
   constructor(private api: ApiService) { }
 
   getSubscriptions(): Observable<SubscriptionType[]>{
-    return this.api.get("subscription/api/v1/subscriptionsType")
+    return this.api.get("api/v1/subscription/subscriptionsType")
   }
 }

@@ -1,10 +1,11 @@
 <div class="wrapper">
   <ul>
     <li><a routerLink="/home">Home</a></li>
-    <li><a routerLink="/login">Login</a></li>
-    <li><a routerLink="/register">Register</a></li>
-    <li><a routerLink="/stats">Stats</a></li>
-    <li><a routerLink="/ticket">Ticket</a></li>
+    <li *ngIf="role == ''"><a routerLink="/login">Login</a></li>
+    <li *ngIf="role == ''"><a routerLink="/register">Register</a></li>
+    <li *ngIf="role != ''"><a routerLink="/stats">Stats</a></li>
+    <li *ngIf="role != ''"><a routerLink="/ticket">Ticket</a></li>
+    <li *ngIf="role != ''"><a (click)="logout()">Logout</a></li>
     <li><h4>Collect&verything</h4></li>
   </ul>
 

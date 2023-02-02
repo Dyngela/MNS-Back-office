@@ -43,8 +43,8 @@ export class JwtService {
     if (token) {
       const decoded = this.decodeToken(token);
       return {
-        storeId: 0,
-        role: decoded.auth[0].authority as string,
+        storeId: decoded.storeId,
+        roles: decoded.roles as string,
         email: decoded.sub as string,
         exp: decoded.exp
       };
@@ -54,7 +54,7 @@ export class JwtService {
 
   hasValidToken() {
     const authUser = this.getUserFromToken();
-    if (authUser && authUser.role && authUser.email && authUser.exp && authUser.storeId) {
+    if (authUser && authUser.roles && authUser.email && authUser.exp && authUser.storeId) {
       return Date.now() <= authUser.exp * 1000;
     }
     return false;

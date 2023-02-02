@@ -10,6 +10,7 @@ import { StatsComponent } from './component/stats/stats.component';
 import { TicketComponent } from './component/ticket/ticket.component';
 import {HttpClientModule} from "@angular/common/http";
 import { StoreCreationComponent } from './component/store-creation/store-creation.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -21,11 +22,12 @@ import { StoreCreationComponent } from './component/store-creation/store-creatio
     TicketComponent,
     StoreCreationComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

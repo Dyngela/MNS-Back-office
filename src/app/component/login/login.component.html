@@ -1,1 +1,20 @@
-<p>login works!</p>
+<section class="wrapper">
+
+  Connect to your account Collect&verything.
+  <br>
+  This is the same as your personal store account.
+
+  <form [formGroup]="form" (ngSubmit)="login()" class="wrapper">
+
+    <label for="email">Email: </label>
+    <input id="email" type="email" formControlName="email">
+
+    <label for="password">Password: </label>
+    <input id="password" type="password" formControlName="password">
+
+    <button type="submit" [disabled]="!form.valid">Login</button>
+
+  </form>
+
+  <h3 *ngIf="formError">Invalid duet</h3>
+</section>

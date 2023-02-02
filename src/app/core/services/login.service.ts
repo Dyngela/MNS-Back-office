@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, distinctUntilChanged, map, ReplaySubject, tap} from "rxjs";
+import {BehaviorSubject, distinctUntilChanged, map, Observable, ReplaySubject, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {JwtService} from "./jwt.service";
 import {environment} from "../constant/constant";
+import {ApiService} from "./api.service";
+import {SubscriptionType} from "../../component/home/home.component";
+import {RegisterBasicUserRequest, RegisterOwnerRequest} from "../../component/register/register.component";
 
 export interface AuthUser {
   storeId: number
   email: string;
   exp: number;
-  role: string;
+  roles: string;
 }
 
 @Injectable({
@@ -23,18 +26,28 @@ export class LoginService {
 
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
 
-  constructor(private http: HttpClient, private jwt: JwtService) {
+  constructor(private http: HttpClient, private jwt: JwtService, private api: ApiService) {
     this.isLoggedIn();
   }
 
 
   login({ email, password }: { email: string; password: string }) {
     return this.http
-      .post<{ token: string }>(`${environment.apiUrl}authentication/api/v1/login`, {
-        username: email,
+      .post(`${environment.apiUrl}api/v1/authentication/login`, {
+        email,
         password,
+      }, {
+        responseType: "text"
       })
-      .pipe(tap((r) => this.createSession(r.token)));
+      .pipe(tap((r) => this.createSession(r)));
+  }
+
+  registerBasicUser(body: RegisterBasicUserRequest): Observable<any>{
+    return this.api.put("api/v1/authentication/save", body)
+  }
+
+  registerOwnerUser(body: RegisterOwnerRequest): Observable<any>{
+    return this.api.put("api/v1/authentication/save", body)
   }
 
   /**
@@ -44,7 +57,7 @@ export class LoginService {
   logout() {
     this.jwt.deleteToken();
     this.isAuthenticatedSubject.next(false);
-    this.currentUserSubject.next({storeId: 0, email: "", exp: 0, role: ""});
+    this.currentUserSubject.next({storeId: 0, email: "", exp: 0, roles: ""});
   }
 
   /**
@@ -62,13 +75,15 @@ export class LoginService {
    *
    * @returns Observable<string | undefined> coresponding to current user Role
    */
-  getRole() {
+  getUser() {
     return this.currentUser.pipe(
       map((u) => {
-        return u.role || this.jwt.getUserFromToken()?.role;
+        return u || this.jwt.getUserFromToken();
       })
     );
   }
+
+
 
   /**
    *

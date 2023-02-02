@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LoginService} from "./core/services/login.service";
 
 @Component({
@@ -6,8 +6,9 @@ import {LoginService} from "./core/services/login.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnDestroy{
+export class AppComponent implements OnDestroy, OnInit{
   title = 'backoffice';
+  role: string = "null"
 
   constructor(private loginService: LoginService) {
   }
@@ -16,4 +17,16 @@ export class AppComponent implements OnDestroy{
     this.loginService.logout()
   }
 
+  ngOnInit(): void {
+    this.loginService.getUser().subscribe({
+      next: (data) => {
+        this.role = data?.roles
+      }
+
+    })
+  }
+
+  logout() {
+    this.loginService.logout()
+  }
 }
