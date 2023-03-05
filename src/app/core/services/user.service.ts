@@ -6,7 +6,7 @@ import {AuthUser} from "./login.service";
 })
 export class UserService {
   //todo be reset to default
-  user: AuthUser = {email: "azee@gmail.com", exp: 8595998559, roles: "OWNER", storeId: 16}
+  user: AuthUser = {email: "azee@gmail.com", exp: 8595998559, roles: "OWNER", storeId: 1}
   constructor() { }
 
   updateUserInfo(info: AuthUser) {

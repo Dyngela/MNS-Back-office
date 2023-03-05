@@ -14,6 +14,10 @@ export class StoreService {
     return this.api.get(`api/v1/store/${id}`)
   }
 
+  getAll(): Observable<Store[]> {
+    return this.api.get(`api/v1/store/all`)
+  }
+
   create(store: Store): Observable<Store> {
     return this.api.put("api/v1/store/save", store)
   }
