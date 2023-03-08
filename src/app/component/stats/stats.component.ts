@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import {StoreService} from "../../core/services/store.service";
 import { Store } from '../store-creation/store-creation.component';
 import { Chart, registerables } from 'chart.js';
+import {FormControl} from '@angular/forms' ;
+
 Chart.register(...registerables);
 
 @Component({
@@ -13,15 +15,21 @@ Chart.register(...registerables);
 export class StatsComponent implements OnInit{
 
   stores : Store[] = [];
-  public chart: any;
+  chart: any;
+  caChartLabels: any;
+  caChartData: any;
+  selectedStore : any;
 
   constructor(private storeService: StoreService) {}
 
   ngOnInit(): void {
     this.loadStoresNames();
-    this.createChart();
-  }
+    var labelsStore2 : string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    var dataStore2 : any[] = [8234.32, 10476.12, 12908.87, 24675.73, 16456.98, 18428.45, 19234.32, 16476.12, 14908.87, 24675.73, 22456.98, 20428.45];
 
+    this.createCAEvolutionChart(labelsStore2, dataStore2);
+  }
+ 
   loadStoresNames(){
     this.storeService.getAll().subscribe({
       next: (data) => {
@@ -29,21 +37,16 @@ export class StatsComponent implements OnInit{
         console.log(data)
       }
     })
-  } 
-  selected = "----"
-
-  update(e : any){
-    this.selected = e.target.value
   }
 
-  createChart(){
+  createCAEvolutionChart(dataLabels : string[], dataValues : any[]){
     var myChart = new Chart("CAEvolutionChart", {
       type: 'line',
       data: {
-          labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin'],
+          labels: dataLabels,
           datasets: [{
               label: 'CA (euros)',
-              data: [9234.32, 10476.12, 12908.87, 24675.73, 16456.98, 18428.45],
+              data: dataValues,
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
@@ -64,33 +67,36 @@ export class StatsComponent implements OnInit{
           }]
       },
       options: {
-          scales: {
-              y: {
-                  beginAtZero: true,
-                  title: {
-                    display: true,
-                    text: 'CA (euros)'
-                  }
-              },
-              x: {
+        scales: {
+            y: {
+                beginAtZero: true,
                 title: {
                   display: true,
-                  text: 'Mois'
+                  text: 'CA (euros)'
                 }
-              }
-          },
-          plugins: {
-            title: {
+            },
+            x: {
+              title: {
                 display: true,
-                text: 'Evolution du chiffre d"affaire sur l"année 2023',
-                padding: {
-                    top: 10,
-                    bottom: 30
-                }
+                text: 'Mois'
+              }
             }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+              display: true,
+              text: 'Evolution du chiffre d"affaire sur l"année 2023',
+              padding: {
+                  top: 10,
+                  bottom: 30
+              }
+          }
         }
       }
     });
-  }  
+  }
 }
 

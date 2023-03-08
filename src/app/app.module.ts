@@ -17,7 +17,9 @@ import { PersonalisationComponent } from './component/personalisation/personalis
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { CreateThemeComponent } from './component/create-theme/create-theme.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { UpdateSubscriptionComponent } from './component/update-subscription/update-subscription.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { UpdateSubscriptionComponent } from './component/update-subscription/upd
     ReactiveFormsModule,
     FormsModule,
     MatTabsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,18 +1,18 @@
 <p>Reporting</p>
 
-<h3>Choose a store</h3>
-<select #cricket (change)="update($event)">
-    <option value="default">----</option>
-    <option *ngFor="let store of stores" [value]="store">
-        {{store.storeName}}
-    </option>
-</select>
-  
-<p>You selected {{selected}}</p>
+<form>
+    <mat-form-field appearance="fill">
+        <mat-label>Select a store :</mat-label>
+        <mat-select [(ngModel)]="selectedStore" name="store">
+            <mat-option *ngFor="let store of stores" [value]="store.storeId">
+                {{store.storeName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>
 
 <div id="divChart">
     <canvas id="CAEvolutionChart"></canvas>
 </div>
 
-Tableau
 
