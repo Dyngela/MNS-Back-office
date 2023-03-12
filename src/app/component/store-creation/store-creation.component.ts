@@ -134,6 +134,10 @@ export class StoreCreationComponent implements OnInit {
       next: (date) => {
         console.log("yes")
         this.paymentSuccess = true
+      },
+      error: err => {
+        this.paymentSuccess = true
+        console.log(err)
       }
     })
 

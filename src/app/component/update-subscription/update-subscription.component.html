@@ -1,1 +1,30 @@
-<p>update-subscription works!</p>
+<section class="wrapper" *ngIf="hasLoaded">
+  Your current subscription:
+  <p>Type: {{currentSub.subscriptionType?.name}}</p>
+  <p>price per week: {{currentSub.subscriptionType?.price}}</p>
+  <p>Date of start: {{dateStart}}</p>
+  <p>Next payment: {{dateEnd}}</p>
+  <p>Invoice rate: {{currentSub.paymentType}}</p>
+
+  Choose your new subscription type:
+  <div class="card-wrapper">
+    <div class="card" *ngFor="let type of subscriptions" (click)="updateSub(type)">
+      Subscription: {{type.name}}
+      <br>
+      Maximum turnover: {{type.turnover}}€
+      <br>
+      Support level: {{type.support}}
+      <br>
+      Price: {{type.price}}€/week
+    </div>
+    <br>
+  </div>
+  Invoice rate:
+  <select [(ngModel)]="invoiceRate">
+    <option selected value="yearly">yearly</option>
+    <option value="monthly">monthly</option>
+    <option value="weekly">weekly</option>
+  </select>
+  Or cancel it. Your subscription won't be renew. Your store will be available until your current subscription is over
+  <button (click)="cancelSub()">Cancel my subscription</button>
+</section>

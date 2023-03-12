@@ -44,16 +44,16 @@
 
   <p>Subscription kind</p>
   <label>Name</label>
-  <input type="text" [(ngModel)]="subscriptionType[subTypeId].name">
+  <input type="text" [(ngModel)]="subscriptionType[subTypeId - 1].name">
 
   <label>Turnover</label>
-  <input type="text" [(ngModel)]="subscriptionType[subTypeId].turnover">
+  <input type="text" [(ngModel)]="subscriptionType[subTypeId - 1].turnover">
 
   <label>Support</label>
-  <input type="text" [(ngModel)]="subscriptionType[subTypeId].support">
+  <input type="text" [(ngModel)]="subscriptionType[subTypeId - 1].support">
 
   <label>¨Price</label>
-  <input type="text" [(ngModel)]="subscriptionType[subTypeId].price">
+  <input type="text" [(ngModel)]="subscriptionType[subTypeId - 1].price">
 
   <button (click)="createStore()">Create my store</button>
 

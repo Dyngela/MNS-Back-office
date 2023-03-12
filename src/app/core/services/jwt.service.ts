@@ -27,7 +27,7 @@ export class JwtService {
 
   getBearerToken() {
     const token = localStorage.getItem(this.token_key);
-    return token ? `Bearer ${token}` : undefined;
+    return token ? `${token}` : undefined;
   }
 
   saveUser(token: string): AuthUser | null {
