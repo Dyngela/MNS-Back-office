@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://collecteverything.fr/',
+  apiUrl: 'http://localhost:8080/',
+  // apiUrl: 'https://collecteverything.fr/',
 };

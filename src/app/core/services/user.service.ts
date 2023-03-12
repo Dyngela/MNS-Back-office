@@ -5,7 +5,11 @@ import {AuthUser} from "./login.service";
   providedIn: 'root'
 })
 export class UserService {
+  //todo be reset to default
+
   constructor() { }
 
+  updateUserInfo(info: AuthUser) {
 
+  }
 }

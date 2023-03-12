@@ -4,6 +4,7 @@ import {UserService} from "../../core/services/user.service";
 import {SubscriptionService} from "../../core/services/subscription.service";
 import {Subscription, SubscriptionType} from "../home/home.component";
 import {InvoiceRate} from "../../core/constant/enums";
+import {LoginService} from "../../core/services/login.service";
 
 @Component({
   selector: 'app-update-subscription',
@@ -13,7 +14,8 @@ import {InvoiceRate} from "../../core/constant/enums";
 export class UpdateSubscriptionComponent implements OnInit{
   constructor(private router: Router,
               private userService: UserService,
-              private subService: SubscriptionService) {
+              private subService: SubscriptionService,
+              private loginService: LoginService) {
   }
 
   currentSub: Subscription = {
@@ -29,23 +31,33 @@ export class UpdateSubscriptionComponent implements OnInit{
   hasLoaded: boolean = false
   dateStart: string | undefined = ""
   dateEnd: string | undefined = ""
+  storeId: number = 0;
 
   ngOnInit() {
-    this.subService.getStoreSubscription(this.userService.user.storeId).subscribe({
+    this.loginService.getUser().subscribe({
       next: value => {
-        this.currentSub = value
-        this.dateStart = this.currentSub.dateStart as unknown as string
-        this.dateEnd = this.currentSub.dateEnd as unknown as string
-        this.dateStart = this.dateStart.split("T")[0]
-        this.dateEnd = this.dateEnd.split("T")[0]
+        this.storeId = value?.storeId
+        this.subService.getStoreSubscription(this.storeId).subscribe({
+          next: value => {
+            this.currentSub = value
+            this.dateStart = this.currentSub.dateStart as unknown as string
+            this.dateEnd = this.currentSub.dateEnd as unknown as string
+            this.dateStart = this.dateStart.split("T")[0]
+            this.dateEnd = this.dateEnd.split("T")[0]
+          }
+        })
+        this.subService.getSubscriptions().subscribe({
+          next: value => {
+            this.subscriptions = value;
+          }
+        })
+        this.hasLoaded = true
+      },
+      error: err => {
+        console.log("error getting role from jwt")
       }
-    })
-    this.subService.getSubscriptions().subscribe({
-      next: value => {
-        this.subscriptions = value;
-      }
-    })
-    this.hasLoaded = true
+    });
+
   }
 
   updateSub(type: SubscriptionType) {
@@ -53,7 +65,7 @@ export class UpdateSubscriptionComponent implements OnInit{
       dateEnd: null,
       dateStart: null,
       paymentType: this.invoiceRate,
-      storeId: this.userService.user.storeId,
+      storeId: this.storeId,
       subscriptionId: this.currentSub.subscriptionId,
       subscriptionType: type
     }
@@ -73,7 +85,7 @@ export class UpdateSubscriptionComponent implements OnInit{
       dateEnd: new Date(),
       dateStart: null,
       paymentType: null,
-      storeId: this.userService.user.storeId,
+      storeId: this.storeId,
       subscriptionId: this.currentSub.subscriptionId,
       subscriptionType: null
     }
