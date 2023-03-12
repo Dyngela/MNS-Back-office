@@ -1,1 +1,18 @@
-<p>stats works!</p>
+<p>Reporting</p>
+
+<form>
+    <mat-form-field appearance="fill">
+        <mat-label>Select a store :</mat-label>
+        <mat-select [(ngModel)]="selectedStore" name="store">
+            <mat-option *ngFor="let store of stores" [value]="store.storeId">
+                {{store.storeName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>
+
+<div id="divChart">
+    <canvas id="CAEvolutionChart"></canvas>
+</div>
+
+

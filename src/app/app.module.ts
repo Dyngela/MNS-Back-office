@@ -17,9 +17,11 @@ import { PersonalisationComponent } from './component/personalisation/personalis
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { CreateThemeComponent } from './component/create-theme/create-theme.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { UpdateSubscriptionComponent } from './component/update-subscription/update-subscription.component';
 import {TokenInterceptor} from "./core/interceptor/TokenInterceptor";
 import {ApiService} from "./core/services/api.service";
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import {ApiService} from "./core/services/api.service";
     ReactiveFormsModule,
     FormsModule,
     MatTabsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
