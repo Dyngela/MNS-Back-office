@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../../core/services/user.service";
 import {SubscriptionService} from "../../core/services/subscription.service";
-import {Subscription, SubscriptionType} from "../home/home.component";
 import {InvoiceRate} from "../../core/constant/enums";
 import {LoginService} from "../../core/services/login.service";
+import {Subscription, SubscriptionType} from "../../core/model/subscription";
 
 @Component({
   selector: 'app-update-subscription',

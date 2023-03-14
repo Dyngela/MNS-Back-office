@@ -3,31 +3,13 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SubscriptionService} from "../../core/services/subscription.service";
 import {StoreService} from "../../core/services/store.service";
 import {LoginService} from "../../core/services/login.service";
-import {Subscription, SubscriptionType} from "../home/home.component";
 import {UserService} from "../../core/services/user.service";
 import {InvoiceRate} from "../../core/constant/enums";
+import {EtherService} from "../../core/services/ether.service";
+import {Address, Store} from "../../core/model/Store";
+import {Subscription, SubscriptionType} from "../../core/model/subscription";
 
-export interface Store {
-  storeId: number
-  siret: string
-  storeName: string
-  sector: string
-  firstname: string
-  lastname: string
-  email: string
-  ethAddress: string
-  phoneNumber: string
-  subscriptionId: number
-}
 
-export interface Address {
-  addressId: number
-  city: string
-  postalCode: string
-  complement: string
-  streetNumber: string
-  streetName: string
-}
 
 @Component({
   selector: 'app-store-creation',
@@ -65,7 +47,8 @@ export class StoreCreationComponent implements OnInit {
               private subService: SubscriptionService,
               private storeService: StoreService,
               private loginService: LoginService,
-              public userService: UserService) {
+              public userService: UserService,
+              private ctx: EtherService) {
   }
 
   ngOnInit(): void {
@@ -138,17 +121,23 @@ export class StoreCreationComponent implements OnInit {
         subscriptionTypeId: this.subTypeId,
       }
     }
-
-    this.subService.create(sub).subscribe({
-      next: (date) => {
-        console.log("yes")
-        this.paymentSuccess = true
-      },
-      error: err => {
-        this.paymentSuccess = true
-        console.log(err)
+    // Calculating roughly the current eth price
+    const ethPrice = this.subscriptionType[this.subTypeId].price / 7;
+    this.ctx.loadWeb3(ethPrice.toString()).then(
+      response => {
+        if (response) {
+          this.subService.create(sub).subscribe({
+            next: (date) => {
+              console.log("yes")
+              this.paymentSuccess = true
+            },
+            error: err => {
+              this.paymentSuccess = true
+              console.log(err)
+            }
+          })
+        }
       }
-    })
-
+    )
   }
 }

@@ -2,29 +2,9 @@ import {Component} from '@angular/core';
 import {Roles} from "../../core/constant/enums";
 import {LoginService} from "../../core/services/login.service";
 import {FormControl, FormGroup} from "@angular/forms";
+import { RegisterOwnerRequest } from 'src/app/core/model/registration';
 
-export interface RegisterOwnerRequest {
-  email: string,
-  password: string,
-  firstName: string,
-  lastName: string,
-  phoneNumber: string,
-  role: Roles,
 
-  siret : string,
-  storeName : string,
-  sector : string,
-}
-
-export interface RegisterBasicUserRequest {
-  email: string,
-  password: string,
-  firstName: string,
-  lastName: string,
-  phoneNumber: string,
-  role: Roles,
-  storeId: number
-}
 
 @Component({
   selector: 'app-register',

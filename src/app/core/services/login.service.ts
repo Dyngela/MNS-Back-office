@@ -4,9 +4,8 @@ import {HttpClient} from "@angular/common/http";
 import {JwtService} from "./jwt.service";
 import {environment} from "../constant/constant";
 import {ApiService} from "./api.service";
-import {SubscriptionType} from "../../component/home/home.component";
-import {RegisterBasicUserRequest, RegisterOwnerRequest} from "../../component/register/register.component";
 import {UserService} from "./user.service";
+import {RegisterBasicUserRequest, RegisterOwnerRequest} from "../model/registration";
 
 export interface AuthUser {
   storeId: number

@@ -8,7 +8,7 @@ import {TicketComponent} from "./component/ticket/ticket.component";
 import {StoreCreationComponent} from "./component/store-creation/store-creation.component";
 import {PersonalManagementComponent} from "./component/personal-management/personal-management.component";
 import {PersonalisationComponent} from "./component/personalisation/personalisation.component";
-import {CreateThemeComponent} from "./component/create-theme/create-theme.component";
+import {CreateThemeComponent} from "./component/theme/create-theme/create-theme.component";
 import {UpdateSubscriptionComponent} from "./component/update-subscription/update-subscription.component";
 
 const routes: Routes = [

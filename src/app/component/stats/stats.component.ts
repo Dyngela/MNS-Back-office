@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import {StoreService} from "../../core/services/store.service";
-import { Store } from '../store-creation/store-creation.component';
 import { Chart, registerables } from 'chart.js';
 import {FormControl} from '@angular/forms' ;
+import {Store} from "../../core/model/Store";
 
 Chart.register(...registerables);
 
@@ -29,7 +29,7 @@ export class StatsComponent implements OnInit{
 
     this.createCAEvolutionChart(labelsStore2, dataStore2);
   }
- 
+
   loadStoresNames(){
     this.storeService.getAll().subscribe({
       next: (data) => {

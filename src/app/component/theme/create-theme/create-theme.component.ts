@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {Customisation} from "../personalisation/personalisation.component";
-import {CustomisationService} from "../../core/services/customisation.service";
-import {UserService} from "../../core/services/user.service";
+import {CustomisationService} from "../../../core/services/customisation.service";
+import {UserService} from "../../../core/services/user.service";
 import {Router} from "@angular/router";
-import {LoginService} from "../../core/services/login.service";
+import {LoginService} from "../../../core/services/login.service";
+import {Customisation} from "../../../core/model/customisation";
 
 @Component({
   selector: 'app-create-theme',

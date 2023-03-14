@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ApiService} from "./api.service";
 import {Observable} from "rxjs";
-import {Customisation} from "../../component/personalisation/personalisation.component";
+import {Customisation} from "../model/customisation";
 
 @Injectable({
   providedIn: 'root'

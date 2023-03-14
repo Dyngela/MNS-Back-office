@@ -1,28 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {SubscriptionService} from "../../core/services/subscription.service";
 import {NavigationExtras, Router} from "@angular/router";
-import {state} from "@angular/animations";
-import {InvoiceRate} from "../../core/constant/enums";
 import {UserService} from "../../core/services/user.service";
 import {LoginService} from "../../core/services/login.service";
-
-export interface SubscriptionType {
-  subscriptionTypeId: number;
-  name: string;
-  turnover: number;
-  support: string;
-  price: number;
-}
+import {Subscription, SubscriptionType} from "../../core/model/subscription";
 
 
-export interface Subscription {
-  subscriptionId: number | null
-  storeId: number | null
-  dateStart: Date | null
-  dateEnd: Date | null
-  paymentType: InvoiceRate | null
-  subscriptionType: SubscriptionType | null
-}
 
 @Component({
   selector: 'app-home',

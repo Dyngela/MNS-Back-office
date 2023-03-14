@@ -3,16 +3,9 @@ import {CustomisationService} from "../../core/services/customisation.service";
 import {UserService} from "../../core/services/user.service";
 import {Router} from "@angular/router";
 import {LoginService} from "../../core/services/login.service";
+import {Customisation} from "../../core/model/customisation";
 
-export interface Customisation {
-  customisationId: number | null
-  colorBackground: string
-  colorButton: string
-  font: string
-  catchPhrase: string
-  active: boolean
-  storeId: number
-}
+
 
 @Component({
   selector: 'app-personalisation',

@@ -15,7 +15,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { PersonalManagementComponent } from './component/personal-management/personal-management.component';
 import { PersonalisationComponent } from './component/personalisation/personalisation.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { CreateThemeComponent } from './component/create-theme/create-theme.component';
+import { CreateThemeComponent } from './component/theme/create-theme/create-theme.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { UpdateSubscriptionComponent } from './component/update-subscription/update-subscription.component';
