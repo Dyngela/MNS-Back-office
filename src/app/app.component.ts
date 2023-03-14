@@ -11,12 +11,11 @@ import {JwtService} from "./core/services/jwt.service";
 })
 export class AppComponent implements OnDestroy, OnInit{
   title = 'backoffice';
-  role: string = "null"
+  role: string = ""
 
   constructor(private loginService: LoginService,
               public userService: UserService,
-              private router: Router,
-              private jwt: JwtService) {
+              private router: Router,) {
   }
 
   ngOnDestroy(): void {
@@ -27,6 +26,7 @@ export class AppComponent implements OnDestroy, OnInit{
     this.loginService.getUser().subscribe({
       next: value => {
         this.role = value?.roles
+        console.log(this.role)
       },
       error: err => {
         console.log("error getting role from jwt")

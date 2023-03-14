@@ -26,7 +26,7 @@ export class LoginService {
 
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
 
-  constructor(private http: HttpClient, private jwt: JwtService, private api: ApiService, private userService: UserService) {
+  constructor(private http: HttpClient, private jwt: JwtService, private api: ApiService) {
     this.isLoggedIn();
   }
 
@@ -40,10 +40,6 @@ export class LoginService {
         responseType: "text"
       })
       .pipe(tap((r) => this.createSession(r)));
-  }
-
-  registerBasicUser(body: RegisterBasicUserRequest): Observable<any>{
-    return this.api.put("api/v1/authentication/save", body)
   }
 
   registerOwnerUser(body: RegisterOwnerRequest): Observable<any>{
@@ -66,7 +62,6 @@ export class LoginService {
   createSession(token: string) {
     const authUser: AuthUser | null = this.jwt.saveUser(token);
     if (authUser) {
-      this.userService.updateUserInfo(authUser)
       this.currentUserSubject.next(authUser);
       this.isAuthenticatedSubject.next(true);
     }

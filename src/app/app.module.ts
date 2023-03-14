@@ -11,7 +11,7 @@ import { StatsComponent } from './component/stats/stats.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { StoreCreationComponent } from './component/store-creation/store-creation.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { PersonalManagementComponent } from './component/personal-management/personal-management.component';
+import { PersonalManagementComponent } from './component/management/personal-management/personal-management.component';
 import { PersonalisationComponent } from './component/customisation/personalisation/personalisation.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { CreateThemeComponent } from './component/customisation/theme/create-theme/create-theme.component';
@@ -24,6 +24,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { CreateTicketComponent } from './component/ticket/create-ticket/create-ticket.component';
 import { ListTicketComponent } from './component/ticket/list-ticket/list-ticket.component';
 import { TicketComponent } from './component/ticket/ticket/ticket.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { UpdateUserComponent } from './component/management/update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import { TicketComponent } from './component/ticket/ticket/ticket.component';
     UpdateSubscriptionComponent,
     CreateTicketComponent,
     ListTicketComponent,
-    TicketComponent
+    TicketComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,9 @@ import { TicketComponent } from './component/ticket/ticket/ticket.component';
     MatTabsModule,
     MatSlideToggleModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

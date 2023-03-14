@@ -5,7 +5,7 @@ import {LoginComponent} from "./component/logger/login/login.component";
 import {RegisterComponent} from "./component/logger/register/register.component";
 import {StatsComponent} from "./component/stats/stats.component";
 import {StoreCreationComponent} from "./component/store-creation/store-creation.component";
-import {PersonalManagementComponent} from "./component/personal-management/personal-management.component";
+import {PersonalManagementComponent} from "./component/management/personal-management/personal-management.component";
 import {PersonalisationComponent} from "./component/customisation/personalisation/personalisation.component";
 import {CreateThemeComponent} from "./component/customisation/theme/create-theme/create-theme.component";
 import {UpdateSubscriptionComponent} from "./component/update-subscription/update-subscription.component";
