@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CustomisationService} from "../../core/services/customisation.service";
 import {UserService} from "../../core/services/user.service";
 import {Router} from "@angular/router";
+import {LoginService} from "../../core/services/login.service";
 
 export interface Customisation {
   customisationId: number | null
@@ -33,10 +34,12 @@ export class PersonalisationComponent implements OnInit {
   }
   hasLoaded: boolean = false
   hasBeenClicked = false
+  storeId = 0
 
   constructor(private customisationService: CustomisationService,
               private userService: UserService,
-              private router: Router) {
+              private router: Router,
+              private loginService: LoginService) {
   }
 
 
@@ -55,13 +58,22 @@ export class PersonalisationComponent implements OnInit {
   }
 
   loadThemes() {
-    this.customisationService.getAll(this.userService.user.storeId).subscribe({
-      next: (data) => {
-        this.myThemes = data
-        this.hasLoaded = true
-        console.log(data)
+    this.loginService.getUser().subscribe({
+      next: value => {
+        this.storeId = value?.storeId
+        this.customisationService.getAll(this.storeId).subscribe({
+          next: (data) => {
+            this.myThemes = data
+            this.hasLoaded = true
+            console.log(data)
+          }
+        })
+      },
+      error: err => {
+        console.log("error getting role from jwt")
       }
-    })
+    });
+
   }
 
   updateTheme() {

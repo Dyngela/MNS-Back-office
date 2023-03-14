@@ -58,6 +58,7 @@ export class StoreCreationComponent implements OnInit {
   subscriptionType: SubscriptionType[] = []
   hasLoaded: boolean = false
   paymentSuccess: boolean = false
+  storeId = 0;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -68,30 +69,36 @@ export class StoreCreationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.userService.user.storeId == 0) {
-      alert("You need to be authenticated to continue")
-      this.router.navigate([
-        `home`,
-      ]);
-      return
-    }
+    this.loginService.getUser().subscribe({
+      next: value => {
+        this.storeId = value?.storeId
+        if (this.storeId == 0) {
+          alert("You need to be authenticated to continue")
+          this.router.navigate([
+            `home`,
+          ]);
+          return
+        }
 
-    this.subService.getSubscriptions().subscribe({
-      next: (subs) => {
-        this.subscriptionType = subs
+        this.subService.getSubscriptions().subscribe({
+          next: (subs) => {
+            this.subscriptionType = subs
+          }
+        })
+        this.storeService.findById(this.storeId).subscribe({
+          next: (data) => {
+            this.store = data
+            this.store.subscriptionId = this.subTypeId
+            console.log(data)
+          }
+        })
+
+        this.hasLoaded = true
+      },
+      error: err => {
+        console.log("error getting role from jwt")
       }
-    })
-    this.storeService.findById(this.userService.user.storeId).subscribe({
-      next: (data) => {
-        this.store = data
-        this.store.subscriptionId = this.subTypeId
-        console.log(data)
-      }
-    })
-
-
-
-    this.hasLoaded = true
+    });
   }
 
   public get subTypeId() {
@@ -102,7 +109,7 @@ export class StoreCreationComponent implements OnInit {
 
     this.storeService.update(this.store).subscribe({
       next: (myStore) => {
-        this.storeService.createAddress(this.address, this.userService.user.storeId).subscribe({
+        this.storeService.createAddress(this.address, this.storeId).subscribe({
           next: (data) => {
             console.log("success")
           }
@@ -125,7 +132,7 @@ export class StoreCreationComponent implements OnInit {
       dateEnd: null,
       dateStart: null,
       paymentType: this.invoiceRate,
-      storeId: this.userService.user.storeId,
+      storeId: this.storeId,
       // @ts-ignore
       subscriptionType: {
         subscriptionTypeId: this.subTypeId,
@@ -136,6 +143,10 @@ export class StoreCreationComponent implements OnInit {
       next: (date) => {
         console.log("yes")
         this.paymentSuccess = true
+      },
+      error: err => {
+        this.paymentSuccess = true
+        console.log(err)
       }
     })
 

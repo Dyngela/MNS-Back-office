@@ -9,7 +9,7 @@ import { RegisterComponent } from './component/register/register.component';
 import { HomeComponent } from './component/home/home.component';
 import { StatsComponent } from './component/stats/stats.component';
 import { TicketComponent } from './component/ticket/ticket.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { StoreCreationComponent } from './component/store-creation/store-creation.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { PersonalManagementComponent } from './component/personal-management/personal-management.component';
@@ -17,7 +17,11 @@ import { PersonalisationComponent } from './component/personalisation/personalis
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { CreateThemeComponent } from './component/create-theme/create-theme.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { UpdateSubscriptionComponent } from './component/update-subscription/update-subscription.component';
+import {TokenInterceptor} from "./core/interceptor/TokenInterceptor";
+import {ApiService} from "./core/services/api.service";
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -41,9 +45,14 @@ import { UpdateSubscriptionComponent } from './component/update-subscription/upd
     ReactiveFormsModule,
     FormsModule,
     MatTabsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    ApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

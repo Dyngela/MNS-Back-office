@@ -1,4 +1,4 @@
-<section *ngIf="hasLoaded && userService.user.roles != '' && !creationSuccess" class="wrapper">
+<section *ngIf="hasLoaded && storeId != 0 && !creationSuccess" class="wrapper">
   Creation of your store:
   <br>
   Some extra personalisation await you later on
@@ -47,22 +47,22 @@
 
   <p>Subscription kind</p>
   <label>Name</label>
-  <input type="text" [(ngModel)]="subscriptionType[subTypeId].name">
+  <input type="text" [(ngModel)]="subscriptionType[subTypeId - 1].name">
 
   <label>Turnover</label>
-  <input type="text" [(ngModel)]="subscriptionType[subTypeId].turnover">
+  <input type="text" [(ngModel)]="subscriptionType[subTypeId - 1].turnover">
 
   <label>Support</label>
-  <input type="text" [(ngModel)]="subscriptionType[subTypeId].support">
+  <input type="text" [(ngModel)]="subscriptionType[subTypeId - 1].support">
 
   <label>¨Price</label>
-  <input type="text" [(ngModel)]="subscriptionType[subTypeId].price">
+  <input type="text" [(ngModel)]="subscriptionType[subTypeId - 1].price">
 
   <button (click)="createStore()">Create my store</button>
 
 </section>
 
-<section *ngIf="hasLoaded && userService.user.roles != '' && creationSuccess && !paymentSuccess" class="wrapper">
+<section *ngIf="hasLoaded && storeId != 0 && creationSuccess && !paymentSuccess" class="wrapper">
   Creation successful. One last step with the billing!
 
   <label>Card number</label>
@@ -88,6 +88,6 @@
 
 </section>
 
-<section *ngIf="hasLoaded && userService.user.roles != '' && creationSuccess && paymentSuccess">
+<section *ngIf="hasLoaded && storeId != 0 && creationSuccess && paymentSuccess">
   <button (click)="goToHisWebsite()">Success! Go to my website right now!</button>
 </section>

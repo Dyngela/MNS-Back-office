@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LoginService} from "./core/services/login.service";
 import {UserService} from "./core/services/user.service";
 import {Router} from "@angular/router";
+import {JwtService} from "./core/services/jwt.service";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent implements OnDestroy, OnInit{
 
   constructor(private loginService: LoginService,
               public userService: UserService,
-              private router: Router) {
+              private router: Router,
+              private jwt: JwtService) {
   }
 
   ngOnDestroy(): void {
@@ -22,10 +24,17 @@ export class AppComponent implements OnDestroy, OnInit{
   }
 
   ngOnInit(): void {
+    this.loginService.getUser().subscribe({
+      next: value => {
+        this.role = value?.roles
+      },
+      error: err => {
+        console.log("error getting role from jwt")
+      }
+    });
   }
 
   logout() {
-    this.userService.user = {email: "", exp: 0, roles: "", storeId: 0}
     this.loginService.logout()
     this.router.navigate([
       `home`,
