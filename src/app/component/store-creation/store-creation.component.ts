@@ -15,6 +15,7 @@ export interface Store {
   firstname: string
   lastname: string
   email: string
+  ethAddress: string
   phoneNumber: string
   subscriptionId: number
 }
@@ -39,6 +40,7 @@ export class StoreCreationComponent implements OnInit {
   invoiceRate: InvoiceRate = InvoiceRate.yearly
 
   store: Store = {
+    ethAddress: "",
     email: "",
     firstname: "",
     lastname: "",
