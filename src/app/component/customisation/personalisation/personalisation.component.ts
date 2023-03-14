@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {CustomisationService} from "../../core/services/customisation.service";
-import {UserService} from "../../core/services/user.service";
+import {CustomisationService} from "../../../core/services/customisation.service";
+import {UserService} from "../../../core/services/user.service";
 import {Router} from "@angular/router";
-import {LoginService} from "../../core/services/login.service";
-import {Customisation} from "../../core/model/customisation";
+import {LoginService} from "../../../core/services/login.service";
+import {Customisation} from "../../../core/model/customisation";
 
 
 

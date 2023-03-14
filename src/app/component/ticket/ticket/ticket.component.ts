@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {LoginService} from "../../core/services/login.service";
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-ticket',
@@ -7,7 +6,5 @@ import {LoginService} from "../../core/services/login.service";
   styleUrls: ['./ticket.component.scss']
 })
 export class TicketComponent {
-
-
 
 }

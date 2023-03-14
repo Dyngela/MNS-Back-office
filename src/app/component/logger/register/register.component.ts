@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Roles} from "../../core/constant/enums";
-import {LoginService} from "../../core/services/login.service";
+import {Roles} from "../../../core/constant/enums";
+import {LoginService} from "../../../core/services/login.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import { RegisterOwnerRequest } from 'src/app/core/model/registration';
 
